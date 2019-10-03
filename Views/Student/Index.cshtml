@@ -1,0 +1,56 @@
+﻿@model StudentModel
+@{
+    ViewData["Title"] = "Index";
+
+    //Making the student objects
+    var student1 = new StudentModel();
+    student1.FirstName = "John";
+    student1.LastName = "Smith";
+    student1.Grade = 'A';
+
+    var student2 = new StudentModel();
+    student2.FirstName = "Bill";
+    student2.LastName = "Johnson";
+    student2.Grade = 'C';
+
+    var student3 = new StudentModel();
+    student3.FirstName = "Jim";
+    student3.LastName = "Halburt";
+    student3.Grade = 'B';
+
+    //Putting the objects into a list
+    var students = new List<StudentModel>
+{ student1, student2, student3};
+
+
+}
+
+<h1>Students</h1>
+<ul>
+    <!--Using the view bag to see what id was entered as a route parameter to determing their access level-->
+    @if (ViewBag.id > 0 && ViewBag.id < 10)
+    {
+        if (ViewBag.id < 2)
+        {
+            <h2> You do not have sufficient access</h2>
+        }
+        else if (ViewBag.id < 8)
+        {
+            @for (var i = 0; i < students.Count; i++)
+            {
+                var student = students[i];
+                <p>First Name: @student.FirstName  Last Name: @student.LastName </p>
+            }
+        }
+        else
+        {
+            <h2>Hello Admin</h2>
+            @for (var i = 0; i < students.Count; i++)
+            {
+                var student = students[i];
+                <p>First Name: @student.FirstName  Last Name: @student.LastName GRADE: @student.Grade</p>
+            }
+        }
+    }
+</ul>
+
