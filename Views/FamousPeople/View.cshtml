@@ -1,0 +1,25 @@
+﻿@model CIS174_TestCoreApp.Models.FamousPerson.FamousPersonDetailViewModel
+@{
+    ViewData["Title"] = Model.FirstName + " " + Model.LastName;
+}
+
+<h2>@ViewData["Title"]</h2>
+<form asp-action="DeletePost" asp-route-id="@Model.Id">
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <button class="btn btn-danger">Delete</button>
+    </p>
+</form>
+
+<li>Date of Birth: @Model.BirthDate</li>
+<li>City: @Model.City</li>
+<li>State: @Model.State</li>
+
+<h4> Accomplishments: </h4>
+<dl>
+    @foreach (var item in Model.Accomplishments)
+    {
+        <dt>@item.Name</dt>
+        <dd>@item.Date</dd>
+    }
+</dl>
