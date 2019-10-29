@@ -24,6 +24,8 @@ namespace CIS174_TestCoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FamousPersonContext>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -37,6 +39,7 @@ namespace CIS174_TestCoreApp
                 options.RespectBrowserAcceptHeader = true;
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             .AddXmlSerializerFormatters();
+            services.AddScoped<FamousPersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
