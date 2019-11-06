@@ -95,5 +95,49 @@ namespace CIS174_TestCoreApp
             person.IsDeleted = true;
             _context.SaveChanges();
         }
+
+        public bool DoesPersonExist(int id)
+        {
+            var person = _context.Persons.Find(id);
+
+            if (person == null)
+            {
+                return false;
+            }
+            return !person.IsDeleted;
+        }
+
+        public void UpdatePerson(int id, UpdateFamousPersonCommand command)
+        {
+            var person = _context.Persons.Find(id);
+            if (person == null)
+            {
+                throw new Exception("Unable to find person");
+            }
+            person.FirstName = command.FirstName;
+            person.LastName = command.LastName;
+            person.BirthDate = command.BirthDate;
+            person.City = command.City;
+            person.State = command.State;
+
+            _context.SaveChanges();
+        }
+
+        public int CreateErrorLog(CreateErrorLogCommand cmd)
+        {
+            var error = cmd.ToLog();
+            _context.Add(error);
+            _context.SaveChanges();
+            return error.Id;
+        }
+
+        public string GetPersonFirstName(int id)
+        {
+            return _context.Persons
+                .Where(x => x.Id == id)
+                .Select(x => x.FirstName)
+                .SingleOrDefault();
+                
+        }
     }
 }
