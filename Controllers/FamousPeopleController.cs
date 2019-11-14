@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CIS174_TestCoreApp.Models.FamousPerson;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CIS174_TestCoreApp.Controllers
 {
+    [Authorize]
     public class FamousPeopleController : Controller
     {
         public FamousPersonService _service;

@@ -4,14 +4,16 @@ using CIS174_TestCoreApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CIS174_TestCoreApp.Migrations
 {
     [DbContext(typeof(FamousPersonContext))]
-    partial class FamousPersonContextModelSnapshot : ModelSnapshot
+    [Migration("20191114012039_AddedFirst&LastName")]
+    partial class AddedFirstLastName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

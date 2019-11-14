@@ -1,9 +1,10 @@
 ﻿using CIS174_TestCoreApp.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CIS174_TestCoreApp
 {
-    public class FamousPersonContext : DbContext
+    public class FamousPersonContext : IdentityDbContext<ApplicationUser>
     {
         public FamousPersonContext(DbContextOptions<FamousPersonContext> options)
             : base(options) { }
