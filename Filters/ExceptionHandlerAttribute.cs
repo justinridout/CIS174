@@ -1,6 +1,7 @@
 ﻿using CIS174_TestCoreApp.Models.FamousPerson;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ namespace CIS174_TestCoreApp.Filters
     public class ExceptionHandlerFilter : ExceptionFilterAttribute
     {
         private readonly FamousPersonService _famousPersonService;
+        readonly ILogger<ExceptionHandlerAttribute> _logger; 
 
-        public ExceptionHandlerFilter(FamousPersonService famousPersonService)
+        public ExceptionHandlerFilter(FamousPersonService famousPersonService,
+            ILogger<ExceptionHandlerAttribute> logger)
         {
+            _logger = logger;
             _famousPersonService = famousPersonService;
         }
 
@@ -44,6 +48,9 @@ namespace CIS174_TestCoreApp.Filters
                     ExceptionMessage = context.Exception.Message,
 
                 };
+
+                _logger.LogWarning(
+                    "Bad Status code of {StatusCode}", context.HttpContext.Response.StatusCode);
 
                 _famousPersonService.CreateErrorLog(cmd);
             }
